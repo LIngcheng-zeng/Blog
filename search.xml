@@ -22,7 +22,9 @@
     <title>启动过程之tomcat</title>
     <url>/blog/posts/60de195c/</url>
     <content><![CDATA[<p>[toc]</p>
-<h1 id="SpringApplication-如何-启动-tomcat-容器"><a href="#SpringApplication-如何-启动-tomcat-容器" class="headerlink" title="SpringApplication 如何 启动 tomcat 容器"></a>SpringApplication 如何 启动 tomcat 容器</h1><p>查看<code>SpringApplication</code> 的源码, 类注释中表明 SpringApplication的定位是  自启动【也就是引导】 和 开始运行 一个Spring应用。</p>
+<h1 id="SpringApplication-如何-启动-tomcat-容器"><a href="#SpringApplication-如何-启动-tomcat-容器" class="headerlink" title="SpringApplication 如何 启动 tomcat 容器"></a>SpringApplication 如何 启动 tomcat 容器</h1><span id="more"></span>
+
+<p>查看<code>SpringApplication</code> 的源码, 类注释中表明 SpringApplication的定位是  自启动【也就是引导】 和 开始运行 一个Spring应用。</p>
 <p>跟踪至  <code> new SpringApplication(primarySources).run(args);</code> </p>
 <p>可以看到接下来的问题转化为</p>
 <h2 id="分析-SpringApplication-的构造方法-和-run-方法，观察如何实现启动tomcat"><a href="#分析-SpringApplication-的构造方法-和-run-方法，观察如何实现启动tomcat" class="headerlink" title="分析  SpringApplication 的构造方法 和 run()方法，观察如何实现启动tomcat"></a>分析  <code>SpringApplication</code> 的构造方法 和 <code>run()</code>方法，观察如何实现启动tomcat</h2><h3 id="分析构造方法"><a href="#分析构造方法" class="headerlink" title="分析构造方法"></a>分析构造方法</h3><p>在<code>SpringApplication</code>的构造方法上 的注释 说明了构造函数的作用</p>
