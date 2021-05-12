@@ -20,28 +20,39 @@
     var CONFIG = {"hostname":"lingcheng-zeng.github.io","root":"/blog/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LingCheng Blog">
-<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/index.html">
+  <meta name="description" content="[toc] SpringApplication 如何 启动 tomcat 容器查看SpringApplication 的源码, 类注释中表明 SpringApplication的定位是  自启动【也就是引导】 和 开始运行 一个Spring应用。 跟踪至   new SpringApplication(primarySources).run(args);  可以看到接下来的问题转化为 分析  Sp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="启动过程之tomcat">
+<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/posts/60de195c/index.html">
 <meta property="og:site_name" content="LingCheng Blog">
+<meta property="og:description" content="[toc] SpringApplication 如何 启动 tomcat 容器查看SpringApplication 的源码, 类注释中表明 SpringApplication的定位是  自启动【也就是引导】 和 开始运行 一个Spring应用。 跟踪至   new SpringApplication(primarySources).run(args);  可以看到接下来的问题转化为 分析  Sp">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/ClassAnnotationConfigServletWebServerApplicationContext.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/propAnnotationConfigServletWebServerApplicationContext.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/1AnnotationConfigServletWebServerApplicationContext.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/ConfigurableApplicationContext.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/ConfiguarableEnviorment.png">
+<meta property="article:published_time" content="2021-05-12T04:37:56.000Z">
+<meta property="article:modified_time" content="2021-05-12T12:47:52.204Z">
 <meta property="article:author" content="Zeng Lingcheng">
+<meta property="article:tag" content="SpringBoot | Tomcat">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/ClassAnnotationConfigServletWebServerApplicationContext.png">
 
-<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/">
+<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/posts/60de195c/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>LingCheng Blog</title>
+  <title>启动过程之tomcat | LingCheng Blog</title>
   
 
 
@@ -139,9 +150,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -157,10 +169,9 @@
       <meta itemprop="name" content="LingCheng Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/60de195c/" class="post-title-link" itemprop="url">启动过程之tomcat</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          启动过程之tomcat
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -184,7 +195,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
+        <p>[toc]</p>
 <h1 id="SpringApplication-如何-启动-tomcat-容器"><a href="#SpringApplication-如何-启动-tomcat-容器" class="headerlink" title="SpringApplication 如何 启动 tomcat 容器"></a>SpringApplication 如何 启动 tomcat 容器</h1><p>查看<code>SpringApplication</code> 的源码, 类注释中表明 SpringApplication的定位是  自启动【也就是引导】 和 开始运行 一个Spring应用。</p>
 <p>跟踪至  <code> new SpringApplication(primarySources).run(args);</code> </p>
 <p>可以看到接下来的问题转化为</p>
@@ -289,98 +300,33 @@
 <p>从分析中可以看出，<code>onRefresh()</code>方法是由启动Tomcat 容器相关的类。</p>
 <p>分析</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/blog/tags/SpringBoot-Tomcat/" rel="tag"># SpringBoot | Tomcat</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/4a17b156/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Zeng Lingcheng">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LingCheng Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/4a17b156/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-30 01:59:07" itemprop="dateCreated datePublished" datetime="2021-04-30T01:59:07+08:00">2021-04-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-12 12:33:36" itemprop="dateModified" datetime="2021-05-12T12:33:36+08:00">2021-05-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/posts/4a17b156/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -433,6 +379,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringApplication-%E5%A6%82%E4%BD%95-%E5%90%AF%E5%8A%A8-tomcat-%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">SpringApplication 如何 启动 tomcat 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90-SpringApplication-%E7%9A%84%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95-%E5%92%8C-run-%E6%96%B9%E6%B3%95%EF%BC%8C%E8%A7%82%E5%AF%9F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%90%AF%E5%8A%A8tomcat"><span class="nav-number">1.1.</span> <span class="nav-text">分析  SpringApplication 的构造方法 和 run()方法，观察如何实现启动tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">分析构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ApplicationContextInitializer-%E6%89%AE%E6%BC%94%E4%BA%86%E6%80%8E%E6%A0%B7%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">ApplicationContextInitializer 扮演了怎样的角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ApplicationListener-%E6%89%AE%E6%BC%94%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">ApplicationListener 扮演的角色</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90-run-%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">分析 run()方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90AnnotationConfigServletWebServerApplicationContext%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">分析AnnotationConfigServletWebServerApplicationContext的角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90ConfigurableApplicationContext-%E6%89%AE%E6%BC%94%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">分析ConfigurableApplicationContext 扮演的角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90-ApplciationContext%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">分析 ApplciationContext的角色</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BeanFactory%EF%BC%8CListableBeanFactory-%E6%89%AE%E6%BC%94%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.3.1.</span> <span class="nav-text">BeanFactory，ListableBeanFactory 扮演的角色</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MessageSource-%E6%89%AE%E6%BC%94%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.3.2.</span> <span class="nav-text">MessageSource 扮演的角色</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ResourceLoader-%E6%89%AE%E6%BC%94%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.3.3.</span> <span class="nav-text">ResourceLoader 扮演的角色</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90SpringApplicationRunListeners%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">分析SpringApplicationRunListeners的角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90ApplicationArguments%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">分析ApplicationArguments的角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90ConfigurableEnvironment%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">分析ConfigurableEnvironment的角色</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90refresh"><span class="nav-number">1.1.3.</span> <span class="nav-text">分析refresh()</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
