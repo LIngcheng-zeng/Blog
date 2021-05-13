@@ -21,7 +21,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>启动过程之tomcat</title>
+    <title>启动 内置tomcat 容器 的调用链路跟踪</title>
     <url>/blog/posts/60de195c/</url>
     <content><![CDATA[<p>[toc]</p>
 <h1 id="启动-内置tomcat-容器-的调用链路跟踪"><a href="#启动-内置tomcat-容器-的调用链路跟踪" class="headerlink" title="启动 内置tomcat 容器 的调用链路跟踪"></a>启动 内置tomcat 容器 的调用链路跟踪</h1><p>查看<code>SpringApplication</code> 的源码, 类注释中表明 SpringApplication的定位是  自启动【也就是引导】 和 开始运行 一个Spring应用。</p>
