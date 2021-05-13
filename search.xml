@@ -58,9 +58,9 @@
 </ol>
 <p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/ClassAnnotationConfigServletWebServerApplicationContext.png" alt="AnnotationConfigServletWebServerApplicationContext"></p>
 <p>Protect可见下，相关类属性分布</p>
-<p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/protect_prop_AnnotationConfigServletWebServerApplicationContext.png" alt="AnnotationConfigServletWebServerApplicationContext"></p>
+<p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/protect_prop_AnnotationConfigServletWebServerApplicationContext.png" alt="prop_AnnotationConfigServletWebServerApplicationContext"></p>
 <p>Protect 可见下 ，相关类函数分布如下</p>
-<p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/protect_AnnotationConfigServletWebServerApplicationContext.png" alt="AnnotationConfigServletWebServerApplicationContext"></p>
+<p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/protect_AnnotationConfigServletWebServerApplicationContext.png" alt="method_AnnotationConfigServletWebServerApplicationContext"></p>
 <h4 id="分析ConfigurableApplicationContext-扮演的角色"><a href="#分析ConfigurableApplicationContext-扮演的角色" class="headerlink" title="分析ConfigurableApplicationContext 扮演的角色"></a>分析ConfigurableApplicationContext 扮演的角色</h4><p>类图如下</p>
 <p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/ConfigurableApplicationContext.png" alt="截屏2021-05-12 上午12.27.23"></p>
 <p>观察接口注释，可以看出，此接口的实现类的功能是</p>
@@ -143,7 +143,7 @@
 </ol>
 ]]></content>
       <tags>
-        <tag>SpringBoot</tag>
+        <tag>源码跟踪</tag>
       </tags>
   </entry>
 </search>
