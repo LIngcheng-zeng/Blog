@@ -20,15 +20,22 @@
     var CONFIG = {"hostname":"lingcheng-zeng.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LingCheng Blog">
-<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/tags/%E6%BA%90%E7%A0%81%E8%B7%9F%E8%B8%AA/index.html">
+  <meta name="description" content="[toc] SpringBoot 下 业务Bean的生成过程跟踪首先 Bean 是 Java 对象，然后才是Bean。Bean 的依赖注入，也就是 对象的属性 进行 赋值的过程。对象有成员属性，成员属性有基本类型的，有的成员本身也是一个对象。基本类型的注入可以通过PropertiesSource进行注入，对象类型的则通过Bean注入。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot下业务Bean的生成过程跟踪">
+<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/posts/80587bc/index.html">
 <meta property="og:site_name" content="LingCheng Blog">
+<meta property="og:description" content="[toc] SpringBoot 下 业务Bean的生成过程跟踪首先 Bean 是 Java 对象，然后才是Bean。Bean 的依赖注入，也就是 对象的属性 进行 赋值的过程。对象有成员属性，成员属性有基本类型的，有的成员本身也是一个对象。基本类型的注入可以通过PropertiesSource进行注入，对象类型的则通过Bean注入。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-16T04:43:09.000Z">
+<meta property="article:modified_time" content="2021-05-19T13:53:14.740Z">
 <meta property="article:author" content="Zeng Lingcheng">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Bean">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/tags/%E6%BA%90%E7%A0%81%E8%B7%9F%E8%B8%AA/">
+<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/posts/80587bc/">
 
 
 <script id="page-configurations">
@@ -36,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: 源码跟踪 | LingCheng Blog</title>
+  <title>SpringBoot下业务Bean的生成过程跟踪 | LingCheng Blog</title>
   
 
 
@@ -182,57 +189,131 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">源码跟踪
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/80587bc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zeng Lingcheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LingCheng Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot下业务Bean的生成过程跟踪
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-16 12:43:09" itemprop="dateCreated datePublished" datetime="2021-05-16T12:43:09+08:00">2021-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-19 21:53:14" itemprop="dateModified" datetime="2021-05-19T21:53:14+08:00">2021-05-19</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <p>[toc]</p>
+<h1 id="SpringBoot-下-业务Bean的生成过程跟踪"><a href="#SpringBoot-下-业务Bean的生成过程跟踪" class="headerlink" title="SpringBoot 下 业务Bean的生成过程跟踪"></a>SpringBoot 下 业务Bean的生成过程跟踪</h1><p>首先 Bean 是 Java 对象，然后才是Bean。Bean 的依赖注入，也就是 对象的属性 进行 赋值的过程。对象有成员属性，成员属性有基本类型的，有的成员本身也是一个对象。基本类型的注入可以通过PropertiesSource进行注入，对象类型的则通过Bean注入。</p>
+<span id="more"></span>
+
+<h2 id="JVM-中对象的生成过程"><a href="#JVM-中对象的生成过程" class="headerlink" title="JVM 中对象的生成过程"></a>JVM 中对象的生成过程</h2><p>类在虚拟机中的生命周期 <strong>依次</strong> 经历 类的 加载，验证，准备和初始化以及卸载。对象是在类初始化之后的产物。参考《深入理解Java虚拟机 - 周志明》相关过程如下</p>
+<h3 id="类初始化阶段"><a href="#类初始化阶段" class="headerlink" title="类初始化阶段"></a>类初始化阶段</h3><p>这个阶段就是执行<code>&lt;clinit&gt;()</code>方法的过程。这个方法是Javac编译器的产物。用函数的形式表示这个过程：  <code>clinit()</code> = Javac(XX.class)</p>
+<p>具体的函数过程如下</p>
+<ol>
+<li>所有类变量的 <strong>赋值动作（这里说的是赋值语句，不包括构造函数）</strong> 和静态语句块。收集顺序等于源文件中定义的顺序。</li>
+<li>在触发父类初始化的前提下，父类的<code>clinit()</code>先于子类执行。</li>
+<li><code>clinit()</code>方法是可选的</li>
+<li>Java虚拟机保证多个线程同时去初始化一个类时，该类的<code>clinit()</code>方法仅执行一次。</li>
+</ol>
+<h3 id="构造对象阶段"><a href="#构造对象阶段" class="headerlink" title="构造对象阶段"></a>构造对象阶段</h3><p>对象的生命周期</p>
+<ol>
+<li>为创建的对象分配堆上空间</li>
+<li>对象的属性执行初始化为零值的过程。</li>
+<li>设置对象的对象头。</li>
+<li>执行.class文件的<code>init()</code>函数，也就是类的构造函数</li>
+</ol>
+<p>至此，对象才是一个可引用（也就是可以被应用程序访问）的对象。</p>
+<h2 id="Spring如何在可引用的对象基础上生成自己的Bean"><a href="#Spring如何在可引用的对象基础上生成自己的Bean" class="headerlink" title="Spring如何在可引用的对象基础上生成自己的Bean"></a>Spring如何在可引用的对象基础上生成自己的Bean</h2><p><code>ApplicationContext</code> 代表了容纳Bean的容器，我们将程序所需要的基本功能单元，放到容器之中。在需要时，容器帮我们取出，进行赋值。通过组合基本功能单元，我们实现了应用程序的功能。</p>
+<p>因此，大致的过程应该如下</p>
+<p>定义基本功能单元 ，将定义的基本功能单元从程序代码中寻找出来，然后将之放于容器之中。然后我们定义自己需要什么，并且告诉容器。容器按需找出定义的基本功能单元，完成注入的过程。</p>
+<p>定义Bean的过程发生在编码阶段。</p>
+<p>寻找发现Bean定义的过程参考：<code>ConfigurationClassParser#parse()</code> ，可以在 我的 </p>
+<p>一文中查看<code>refresh()</code>分析中参考具体的链路跟踪过程 。</p>
+<h3 id="Spring何时触发-构造对象阶段"><a href="#Spring何时触发-构造对象阶段" class="headerlink" title="Spring何时触发 构造对象阶段"></a>Spring何时触发 构造对象阶段</h3><h3 id="Spring利用可引用的对象生成自己的Bean"><a href="#Spring利用可引用的对象生成自己的Bean" class="headerlink" title="Spring利用可引用的对象生成自己的Bean"></a>Spring利用可引用的对象生成自己的Bean</h3>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-12T12:37:56+08:00"
-              content="2021-05-12">
-          05-12
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+              <a href="/blog/tags/Bean/" rel="tag"># Bean</a>
+              <a href="/blog/tags/Spring/" rel="tag"># Spring</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/blog/posts/60de195c/" itemprop="url">
-            <span itemprop="name">启动 内置tomcat 容器 的调用链路跟踪</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/posts/60de195c/" rel="prev" title="启动 内置tomcat 容器 的调用链路跟踪">
+      <i class="fa fa-chevron-left"></i> 启动 内置tomcat 容器 的调用链路跟踪
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/posts/fe149bac/" rel="next" title="Web请求处理链路跟踪">
+      Web请求处理链路跟踪 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -279,6 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot-%E4%B8%8B-%E4%B8%9A%E5%8A%A1Bean%E7%9A%84%E7%94%9F%E6%88%90%E8%BF%87%E7%A8%8B%E8%B7%9F%E8%B8%AA"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot 下 业务Bean的生成过程跟踪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E6%88%90%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">JVM 中对象的生成过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%88%9D%E5%A7%8B%E5%8C%96%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">类初始化阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%AF%B9%E8%B1%A1%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.2.</span> <span class="nav-text">构造对象阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E5%A6%82%E4%BD%95%E5%9C%A8%E5%8F%AF%E5%BC%95%E7%94%A8%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%E4%B8%8A%E7%94%9F%E6%88%90%E8%87%AA%E5%B7%B1%E7%9A%84Bean"><span class="nav-number">1.2.</span> <span class="nav-text">Spring如何在可引用的对象基础上生成自己的Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E4%BD%95%E6%97%B6%E8%A7%A6%E5%8F%91-%E6%9E%84%E9%80%A0%E5%AF%B9%E8%B1%A1%E9%98%B6%E6%AE%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text">Spring何时触发 构造对象阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E5%88%A9%E7%94%A8%E5%8F%AF%E5%BC%95%E7%94%A8%E7%9A%84%E5%AF%B9%E8%B1%A1%E7%94%9F%E6%88%90%E8%87%AA%E5%B7%B1%E7%9A%84Bean"><span class="nav-number">1.2.2.</span> <span class="nav-text">Spring利用可引用的对象生成自己的Bean</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -434,6 +516,25 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '6b87b856b0a606a18d65',
+      clientSecret: '11c96f1d7a452a1615d1d3f4bf7d3ce30bea7cda',
+      repo        : 'commentsForBlog',
+      owner       : 'lingcheng-zeng',
+      admin       : ['lingcheng-zeng'],
+      id          : '8eb46da8696dd04d9fc9b7db3c252264',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
