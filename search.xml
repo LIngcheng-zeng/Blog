@@ -24,13 +24,11 @@
 <li>执行.class文件的<code>init()</code>函数，也就是类的构造函数</li>
 </ol>
 <p>至此，对象才是一个可引用（也就是可以被应用程序访问）的对象。</p>
-<h2 id="Spring如何在可引用的对象基础上生成自己的Bean"><a href="#Spring如何在可引用的对象基础上生成自己的Bean" class="headerlink" title="Spring如何在可引用的对象基础上生成自己的Bean"></a>Spring如何在可引用的对象基础上生成自己的Bean</h2><p><code>ApplicationContext</code> 代表了容纳Bean的容器，我们将程序所需要的基本功能单元，放到容器之中。在需要时，容器帮我们取出，进行赋值。通过组合基本功能单元，我们实现了应用程序的功能。</p>
+<h2 id="Spring生成业务Bean的过程"><a href="#Spring生成业务Bean的过程" class="headerlink" title="Spring生成业务Bean的过程"></a>Spring生成业务Bean的过程</h2><p><code>ApplicationContext</code> 代表了容纳Bean的容器，我们将程序所需要的基本功能单元，放到容器之中。在需要时，容器帮我们取出，进行赋值。通过组合基本功能单元，我们实现了应用程序的功能。</p>
 <p>因此，大致的过程应该如下</p>
 <p>定义基本功能单元 ，将定义的基本功能单元从程序代码中寻找出来，然后将之放于容器之中。然后我们定义自己需要什么，并且告诉容器。容器按需找出定义的基本功能单元，完成注入的过程。</p>
-<p>定义Bean的过程发生在编码阶段。</p>
-<p>寻找发现Bean定义的过程参考：<code>ConfigurationClassParser#parse()</code></p>
-<p>在实例化BeanFactory的</p>
-<h3 id="分析ConfigurationClassParser-parse"><a href="#分析ConfigurationClassParser-parse" class="headerlink" title="分析ConfigurationClassParser#parse()"></a>分析ConfigurationClassParser#parse()</h3><h3 id="Spring利用可引用的对象生成自己的Bean"><a href="#Spring利用可引用的对象生成自己的Bean" class="headerlink" title="Spring利用可引用的对象生成自己的Bean"></a>Spring利用可引用的对象生成自己的Bean</h3>]]></content>
+<p>参考 <a href="https://lingcheng-zeng.github.io/blog/posts/60de195c/#more">启动内置tomcat容器</a> 一文中的<code>refresh()</code>方法的分析，寻找Bean定义的过程 是  <code>invokeBeanFactoryPostProcessors()</code>执行的过程，业务Bean的实例化发生在<code>finishBeanFactoryInitialization()</code>方法中。 </p>
+]]></content>
       <tags>
         <tag>SpringBoot</tag>
         <tag>Bean</tag>
