@@ -64,6 +64,14 @@
       </tags>
   </entry>
   <entry>
+    <title>Web请求处理链路跟踪</title>
+    <url>/blog/posts/fe149bac/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Spring的事务管理总结</title>
     <url>/blog/posts/c95d5afb/</url>
     <content><![CDATA[<h1 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h1><h2 id="Spring-提供的支持"><a href="#Spring-提供的支持" class="headerlink" title="Spring 提供的支持"></a>Spring 提供的支持</h2><table>
@@ -152,17 +160,9 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Web请求处理链路跟踪</title>
-    <url>/blog/posts/fe149bac/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>SpringMVC</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>应用程序间的数据交换</title>
     <url>/blog/posts/9b67a8b0/</url>
-    <content><![CDATA[<p>应用间的数据交换，本质上是内存中的数据转化为字节流从一端流向另一端，历经    内存 – 网络/磁盘 – 内存 这一路径，涉及序列化，数据传输，反序列化等过程。</p>
+    <content><![CDATA[<h1 id="应用间的数据交换"><a href="#应用间的数据交换" class="headerlink" title="应用间的数据交换"></a>应用间的数据交换</h1><p>应用间的数据交换，本质上是内存中的数据转化为字节流从一端流向另一端，历经    内存 – 网络/磁盘 – 内存 这一路径，涉及序列化，数据传输，反序列化等过程。</p>
 <p>开发的应用程序通常构建在应用层之上，也就是说应用程序在进行数据传输时会受到如下各层协议的影响。</p>
 <ol>
 <li>应用层协议的影响</li>
@@ -176,10 +176,6 @@
 <p>所以，要对已有的数据交换过程进行优化，也就是要对原有的交换链路进行评估和优化。netty 加快了数据的处理时间【单位时间内可以处理更多的请求】，使得网络可以更快的传输数据。不同的序列化协议，一个是要考虑执行序列化花费的时间，二是考虑序列化后数据的大小。</p>
 <p>链接：从缓存到应用进程  <a href="https://github.com/rabbitmq/rabbitmq-server.git">https://github.com/rabbitmq/rabbitmq-server.git</a></p>
 <span id="more"></span>
-
-
-
-
 
 
 
@@ -240,7 +236,7 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>Mybatis组件分析</title>
     <url>/blog/posts/550e64fc/</url>
     <content><![CDATA[<h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><h2 id="使用Mybatis时的组件依赖"><a href="#使用Mybatis时的组件依赖" class="headerlink" title="使用Mybatis时的组件依赖"></a>使用Mybatis时的组件依赖</h2><p>应用程序 –&gt;  mybatis  –&gt;  com.mysql.cj.jdbc –&gt;mysql</p>
 <p>应用程序 –&gt;  Spring    –&gt; mybatis –&gt; com.mysql.cj.jdbc –&gt; mysql 【驱动器为com.mysql.cj.jdbc.Driver 时】</p>
