@@ -20,30 +20,32 @@
     var CONFIG = {"hostname":"lingcheng-zeng.github.io","root":"/blog/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="欢迎交流">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LingCheng">
-<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/index.html">
+  <meta name="description" content="TransactionSpring 提供的支持   Action Spring You    Define connection parameters.  X   Open the connection. X    Specify the SQL statement.  X   Declare parameters and provide parameter values  X   Prepare">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring的事务管理总结">
+<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/posts/c95d5afb/index.html">
 <meta property="og:site_name" content="LingCheng">
-<meta property="og:description" content="欢迎交流">
+<meta property="og:description" content="TransactionSpring 提供的支持   Action Spring You    Define connection parameters.  X   Open the connection. X    Specify the SQL statement.  X   Declare parameters and provide parameter values  X   Prepare">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-31T07:07:56.000Z">
+<meta property="article:modified_time" content="2021-07-01T16:59:28.538Z">
 <meta property="article:author" content="Zeng Lingcheng">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/">
+<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/posts/c95d5afb/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>LingCheng</title>
+  <title>Spring的事务管理总结 | LingCheng</title>
   
 
 
@@ -184,180 +186,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/9b67a8b0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Zeng Lingcheng">
-      <meta itemprop="description" content="欢迎交流">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LingCheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/9b67a8b0/" class="post-title-link" itemprop="url">应用程序间的数据交换</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-07-02 00:59:04" itemprop="dateCreated datePublished" datetime="2021-07-02T00:59:04+08:00">2021-07-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-05 21:18:33" itemprop="dateModified" datetime="2021-07-05T21:18:33+08:00">2021-07-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>应用间的数据交换，本质上是内存中的数据转化为字节流从一端流向另一端，历经    内存 – 网络/磁盘 – 内存 这一路径，涉及序列化，数据传输，反序列化等过程。</p>
-<p>开发的应用程序通常构建在应用层之上，也就是说应用程序在进行数据传输时会受到如下各层协议的影响。</p>
-<ol>
-<li>应用层协议的影响</li>
-<li>传输层协议的影响</li>
-<li>网络层协议的影响</li>
-<li>链路层，物理层的影响</li>
-</ol>
-<p>例如</p>
-<p>浏览器通过http协议与服务端的通信。</p>
-<p>后端服务间通过TCP或者HTTP或者一些其他的协议进行通信。</p>
-<p>所以，要对已有的数据交换过程进行优化，也就是要对原有的交换链路进行评估和优化。netty 加快了数据的处理时间【单位时间内可以处理更多的请求】，使得网络可以更快的传输数据。不同的序列化协议，一个是要考虑执行序列化花费的时间，二是考虑序列化后数据的大小。</p>
-<p>链接：从缓存到应用进程  <a target="_blank" rel="noopener" href="https://github.com/rabbitmq/rabbitmq-server.git">https://github.com/rabbitmq/rabbitmq-server.git</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/posts/9b67a8b0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/cb73b93d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Zeng Lingcheng">
-      <meta itemprop="description" content="欢迎交流">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LingCheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/cb73b93d/" class="post-title-link" itemprop="url">Java中队列介绍</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-20 21:47:00" itemprop="dateCreated datePublished" datetime="2021-06-20T21:47:00+08:00">2021-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-02 00:59:28" itemprop="dateModified" datetime="2021-07-02T00:59:28+08:00">2021-07-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Java-中队列的分类"><a href="#Java-中队列的分类" class="headerlink" title="Java 中队列的分类"></a>Java 中队列的分类</h3><ol>
-<li>按照是否有界分，也就是队列的尺寸大小是否固定</li>
-<li>按照是否阻塞分，用户在执行取或者是放元素时，是否会被阻塞</li>
-<li>按照实现是数组实现还是链表实现分，重点是随机访问还是只范围头和尾的有限部分元素</li>
-<li>按照是否支持双端插入和移除分，Queue, Deque</li>
-<li>按照是否并发安全分</li>
-</ol>
-<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>线程获取不到锁时，阻塞自己。</p>
-<p>基本接口为Lock，设计的操作包括：获取锁；尝试获取锁；尝试获取不到锁时，在指定时间内获取锁，释放锁，和</p>
-<p>基本实现为ReentrantLock。可以被持有锁的线程多次上锁</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AbstractQueuedSynchronizer</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="AbstractQueuedSynchronizer"><a href="#AbstractQueuedSynchronizer" class="headerlink" title="AbstractQueuedSynchronizer"></a>AbstractQueuedSynchronizer</h3><p>提供了  实现依赖于  先进先出等待队列  的阻塞锁 和 同步器 的功能单元。</p>
-<p>在不同模式下等待的线程共享相同的 FIFO 队列</p>
-<h4 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h4><p>共享模式或者是排他模式</p>
-<p>当前节点waitStatus</p>
-<p>当前节点的pre,next</p>
-<p>被当前节点代表的线程</p>
-<p>指向下一个在条件上等待的节点的指针。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -373,10 +205,9 @@
       <meta itemprop="name" content="LingCheng">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/c95d5afb/" class="post-title-link" itemprop="url">Spring的事务管理总结</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Spring的事务管理总结
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -396,6 +227,13 @@
               </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -406,7 +244,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h1><h2 id="Spring-提供的支持"><a href="#Spring-提供的支持" class="headerlink" title="Spring 提供的支持"></a>Spring 提供的支持</h2><table>
+        <h1 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h1><h2 id="Spring-提供的支持"><a href="#Spring-提供的支持" class="headerlink" title="Spring 提供的支持"></a>Spring 提供的支持</h2><table>
 <thead>
 <tr>
 <th align="left">Action</th>
@@ -490,309 +328,40 @@
 <h3 id="CciLocalTransactionManager"><a href="#CciLocalTransactionManager" class="headerlink" title="CciLocalTransactionManager"></a>CciLocalTransactionManager</h3><h2 id="Transaction-bound-Events"><a href="#Transaction-bound-Events" class="headerlink" title="Transaction-bound Events"></a>Transaction-bound Events</h2><p>Spring 4.2 之后事件的侦听器可以绑定到事务的一个阶段。 典型的例子是在事务成功完成时处理事件。 当当前事务的结果实际上对侦听器很重要时，这样做可以更灵活地使用事件。</p>
 <h2 id="PlatformTransactionManager-实现分析"><a href="#PlatformTransactionManager-实现分析" class="headerlink" title="PlatformTransactionManager 实现分析"></a>PlatformTransactionManager 实现分析</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//This implementation handles propagation behavior. Delegates to doGetTransaction,isExistingTransaction</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> TransactionStatus <span class="title">getTransaction</span><span class="params">(<span class="meta">@Nullable</span> TransactionDefinition definition)</span></span></span><br><span class="line"><span class="function">      <span class="keyword">throws</span> TransactionException </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Use defaults if no transaction definition given.</span></span><br><span class="line">   TransactionDefinition def = (definition != <span class="keyword">null</span> ? definition : TransactionDefinition.withDefaults());</span><br><span class="line"></span><br><span class="line">   Object transaction = doGetTransaction();</span><br><span class="line">   <span class="keyword">boolean</span> debugEnabled = logger.isDebugEnabled();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (isExistingTransaction(transaction)) &#123;</span><br><span class="line">      <span class="comment">// Existing transaction found -&gt; check propagation behavior to find out how to behave.</span></span><br><span class="line">      <span class="keyword">return</span> handleExistingTransaction(def, transaction, debugEnabled);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Check definition settings for new transaction.</span></span><br><span class="line">   <span class="keyword">if</span> (def.getTimeout() &lt; TransactionDefinition.TIMEOUT_DEFAULT) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> InvalidTimeoutException(<span class="string">&quot;Invalid transaction timeout&quot;</span>, def.getTimeout());</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// No existing transaction found -&gt; check propagation behavior to find out how to proceed.</span></span><br><span class="line">   <span class="keyword">if</span> (def.getPropagationBehavior() == TransactionDefinition.PROPAGATION_MANDATORY) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalTransactionStateException(</span><br><span class="line">            <span class="string">&quot;No existing transaction found for transaction marked with propagation &#x27;mandatory&#x27;&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">if</span> (def.getPropagationBehavior() == TransactionDefinition.PROPAGATION_REQUIRED ||</span><br><span class="line">         def.getPropagationBehavior() == TransactionDefinition.PROPAGATION_REQUIRES_NEW ||</span><br><span class="line">         def.getPropagationBehavior() == TransactionDefinition.PROPAGATION_NESTED) &#123;</span><br><span class="line">      SuspendedResourcesHolder suspendedResources = suspend(<span class="keyword">null</span>);</span><br><span class="line">      <span class="keyword">if</span> (debugEnabled) &#123;</span><br><span class="line">         logger.debug(<span class="string">&quot;Creating new transaction with name [&quot;</span> + def.getName() + <span class="string">&quot;]: &quot;</span> + def);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">boolean</span> newSynchronization = (getTransactionSynchronization() != SYNCHRONIZATION_NEVER);</span><br><span class="line">         DefaultTransactionStatus status = newTransactionStatus(</span><br><span class="line">               def, transaction, <span class="keyword">true</span>, newSynchronization, debugEnabled, suspendedResources);</span><br><span class="line">         doBegin(transaction, def);</span><br><span class="line">         prepareSynchronization(status, def);</span><br><span class="line">         <span class="keyword">return</span> status;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (RuntimeException | Error ex) &#123;</span><br><span class="line">         resume(<span class="keyword">null</span>, suspendedResources);</span><br><span class="line">         <span class="keyword">throw</span> ex;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// Create &quot;empty&quot; transaction: no actual transaction, but potentially synchronization.</span></span><br><span class="line">      <span class="keyword">if</span> (def.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT &amp;&amp; logger.isWarnEnabled()) &#123;</span><br><span class="line">         logger.warn(<span class="string">&quot;Custom isolation level specified but no actual transaction initiated; &quot;</span> +</span><br><span class="line">               <span class="string">&quot;isolation level will effectively be ignored: &quot;</span> + def);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">boolean</span> newSynchronization = (getTransactionSynchronization() == SYNCHRONIZATION_ALWAYS);</span><br><span class="line">      <span class="keyword">return</span> prepareTransactionStatus(def, <span class="keyword">null</span>, <span class="keyword">true</span>, newSynchronization, debugEnabled, <span class="keyword">null</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/550e64fc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Zeng Lingcheng">
-      <meta itemprop="description" content="欢迎交流">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LingCheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/550e64fc/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-28 10:45:37" itemprop="dateCreated datePublished" datetime="2021-05-28T10:45:37+08:00">2021-05-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-02 01:03:10" itemprop="dateModified" datetime="2021-07-02T01:03:10+08:00">2021-07-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><h2 id="使用Mybatis时的组件依赖"><a href="#使用Mybatis时的组件依赖" class="headerlink" title="使用Mybatis时的组件依赖"></a>使用Mybatis时的组件依赖</h2><p>应用程序 –&gt;  mybatis  –&gt;  com.mysql.cj.jdbc –&gt;mysql</p>
-<p>应用程序 –&gt;  Spring    –&gt; mybatis –&gt; com.mysql.cj.jdbc –&gt; mysql 【驱动器为com.mysql.cj.jdbc.Driver 时】</p>
-<h2 id="JDBC-API"><a href="#JDBC-API" class="headerlink" title="JDBC API"></a>JDBC API</h2><p>Java JDBC API  的设计思想：根据API 编写的应用都可以与驱动管理器进行通信，而驱动管理器则通过驱动程序与实际的数据库进行通信。，JDBC使得我们可以通过SQL与数据库进行通信。我们可以将JDBC包看作是一个用于将SQL语句传递给数据库的API。</p>
-<p>API 包名：java.sql 和 javax.sql </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[Client] --&gt;|http|B[Bussinees Service]</span><br><span class="line">    B --&gt; C[JDBC API]</span><br><span class="line">    C --&gt;|protocol| D[DataBase Server]</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/posts/550e64fc/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/fe149bac/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Zeng Lingcheng">
-      <meta itemprop="description" content="欢迎交流">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LingCheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/fe149bac/" class="post-title-link" itemprop="url">Web请求处理链路跟踪</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-05-16 12:47:05 / 修改时间：12:51:07" itemprop="dateCreated datePublished" datetime="2021-05-16T12:47:05+08:00">2021-05-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/80587bc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Zeng Lingcheng">
-      <meta itemprop="description" content="欢迎交流">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LingCheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/80587bc/" class="post-title-link" itemprop="url">SpringBoot下业务Bean的生成过程跟踪</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-16 12:43:09" itemprop="dateCreated datePublished" datetime="2021-05-16T12:43:09+08:00">2021-05-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-21 23:44:03" itemprop="dateModified" datetime="2021-05-21T23:44:03+08:00">2021-05-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[toc]</p>
-<h1 id="SpringBoot-下-业务Bean的生成过程跟踪"><a href="#SpringBoot-下-业务Bean的生成过程跟踪" class="headerlink" title="SpringBoot 下 业务Bean的生成过程跟踪"></a>SpringBoot 下 业务Bean的生成过程跟踪</h1><p>首先 Bean 是 Java 对象，然后才是Bean。Bean 的依赖注入，也就是 对象的属性 进行 赋值的过程。对象有成员属性，成员属性有基本类型的，有的成员本身也是一个对象。基本类型的注入可以通过PropertiesSource进行注入，对象类型的则通过Bean注入。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/posts/80587bc/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/posts/550e64fc/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/posts/cb73b93d/" rel="next" title="Java中队列介绍">
+      Java中队列介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/60de195c/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Zeng Lingcheng">
-      <meta itemprop="description" content="欢迎交流">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LingCheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/posts/60de195c/" class="post-title-link" itemprop="url">启动 内置tomcat 容器 的调用链路跟踪</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-12 12:37:56" itemprop="dateCreated datePublished" datetime="2021-05-12T12:37:56+08:00">2021-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-26 11:34:22" itemprop="dateModified" datetime="2021-05-26T11:34:22+08:00">2021-05-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[toc]</p>
-<h1 id="启动-内置tomcat-容器-的调用链路跟踪"><a href="#启动-内置tomcat-容器-的调用链路跟踪" class="headerlink" title="启动 内置tomcat 容器 的调用链路跟踪"></a>启动 内置tomcat 容器 的调用链路跟踪</h1><p>查看<code>SpringApplication</code> 的源码, 类注释中表明 SpringApplication的定位是  自启动【也就是引导】 和 开始运行 一个Spring应用。</p>
-<p>跟踪至  <code> new SpringApplication(primarySources).run(args);</code> </p>
-<p>可以看到接下来的问题转化为分析  <code>SpringApplication</code> 的构造方法 和 <code>run()</code>方法，观察如何实现启动tomcat.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/posts/60de195c/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -839,6 +408,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction"><span class="nav-number">1.</span> <span class="nav-text">Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-%E6%8F%90%E4%BE%9B%E7%9A%84%E6%94%AF%E6%8C%81"><span class="nav-number">1.1.</span> <span class="nav-text">Spring 提供的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transaction-Management"><span class="nav-number">1.2.</span> <span class="nav-text">Transaction Management</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PlatformTransactionManager-%E7%9A%84%E5%9C%A8jdbc%E5%8C%85%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">PlatformTransactionManager 的在jdbc包的几种实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataSourceTransactionManager"><span class="nav-number">1.3.1.</span> <span class="nav-text">DataSourceTransactionManager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PlatformTransactionManager-%E7%9A%84%E5%9C%A8tx%E5%8C%85%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">PlatformTransactionManager 的在tx包的几种实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AbstractPlatformTransactionManager-%E6%89%BF%E6%8B%85%E7%9A%84%E8%A7%92%E8%89%B2"><span class="nav-number">1.4.1.</span> <span class="nav-text">AbstractPlatformTransactionManager 承担的角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JtaTransactionManager"><span class="nav-number">1.4.2.</span> <span class="nav-text">JtaTransactionManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebLogicJtaTransactionManager"><span class="nav-number">1.4.3.</span> <span class="nav-text">WebLogicJtaTransactionManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSphereUowTransactionManager"><span class="nav-number">1.4.4.</span> <span class="nav-text">WebSphereUowTransactionManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CciLocalTransactionManager"><span class="nav-number">1.4.5.</span> <span class="nav-text">CciLocalTransactionManager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transaction-bound-Events"><span class="nav-number">1.5.</span> <span class="nav-text">Transaction-bound Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PlatformTransactionManager-%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90"><span class="nav-number">1.6.</span> <span class="nav-text">PlatformTransactionManager 实现分析</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -994,6 +564,25 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '6b87b856b0a606a18d65',
+      clientSecret: '11c96f1d7a452a1615d1d3f4bf7d3ce30bea7cda',
+      repo        : 'commentsForBlog',
+      owner       : 'lingcheng-zeng',
+      admin       : ['lingcheng-zeng'],
+      id          : '574a88115f5ea8afef37c2eca9bd5abb',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"lingcheng-zeng.github.io","root":"/blog/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Ch">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/categories/index.html">
+  <meta name="description" content="Java 中队列的分类 按照是否有界分，也就是队列的尺寸大小是否固定 按照是否阻塞分，用户在执行取或者是放元素时，是否会被阻塞 按照实现是数组实现还是链表实现分，重点是随机访问还是只范围头和尾的有限部分元素 按照是否支持双端插入和移除分，Queue, Deque 按照是否并发安全分  锁线程获取不到锁时，阻塞自己。 基本接口为Lock，设计的操作包括：获取锁；尝试获取锁；尝试获取不到锁时，在指定时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中队列介绍">
+<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/posts/cb73b93d/index.html">
 <meta property="og:site_name" content="LingCheng">
-<meta property="og:description" content="Ch">
+<meta property="og:description" content="Java 中队列的分类 按照是否有界分，也就是队列的尺寸大小是否固定 按照是否阻塞分，用户在执行取或者是放元素时，是否会被阻塞 按照实现是数组实现还是链表实现分，重点是随机访问还是只范围头和尾的有限部分元素 按照是否支持双端插入和移除分，Queue, Deque 按照是否并发安全分  锁线程获取不到锁时，阻塞自己。 基本接口为Lock，设计的操作包括：获取锁；尝试获取锁；尝试获取不到锁时，在指定时">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-12T17:21:30.000Z">
-<meta property="article:modified_time" content="2021-05-14T03:47:54.590Z">
+<meta property="article:published_time" content="2021-06-20T13:47:00.000Z">
+<meta property="article:modified_time" content="2021-07-01T16:59:28.536Z">
 <meta property="article:author" content="Zeng Lingcheng">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/categories/">
+<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/posts/cb73b93d/">
 
 
 <script id="page-configurations">
@@ -40,13 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>categories | LingCheng
-</title>
+  <title>Java中队列介绍 | LingCheng</title>
   
 
 
@@ -186,55 +185,123 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/cb73b93d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zeng Lingcheng">
+      <meta itemprop="description" content="欢迎交流">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LingCheng">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java中队列介绍
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">categories
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-<div class="post-meta">
+              <time title="创建时间：2021-06-20 21:47:00" itemprop="dateCreated datePublished" datetime="2021-06-20T21:47:00+08:00">2021-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-02 00:59:28" itemprop="dateModified" datetime="2021-07-02T00:59:28+08:00">2021-07-02</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Java-中队列的分类"><a href="#Java-中队列的分类" class="headerlink" title="Java 中队列的分类"></a>Java 中队列的分类</h3><ol>
+<li>按照是否有界分，也就是队列的尺寸大小是否固定</li>
+<li>按照是否阻塞分，用户在执行取或者是放元素时，是否会被阻塞</li>
+<li>按照实现是数组实现还是链表实现分，重点是随机访问还是只范围头和尾的有限部分元素</li>
+<li>按照是否支持双端插入和移除分，Queue, Deque</li>
+<li>按照是否并发安全分</li>
+</ol>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>线程获取不到锁时，阻塞自己。</p>
+<p>基本接口为Lock，设计的操作包括：获取锁；尝试获取锁；尝试获取不到锁时，在指定时间内获取锁，释放锁，和</p>
+<p>基本实现为ReentrantLock。可以被持有锁的线程多次上锁</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AbstractQueuedSynchronizer</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="AbstractQueuedSynchronizer"><a href="#AbstractQueuedSynchronizer" class="headerlink" title="AbstractQueuedSynchronizer"></a>AbstractQueuedSynchronizer</h3><p>提供了  实现依赖于  先进先出等待队列  的阻塞锁 和 同步器 的功能单元。</p>
+<p>在不同模式下等待的线程共享相同的 FIFO 队列</p>
+<h4 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h4><p>共享模式或者是排他模式</p>
+<p>当前节点waitStatus</p>
+<p>当前节点的pre,next</p>
+<p>被当前节点代表的线程</p>
+<p>指向下一个在条件上等待的节点的指针。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/posts/c95d5afb/" rel="prev" title="Spring的事务管理总结">
+      <i class="fa fa-chevron-left"></i> Spring的事务管理总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/posts/9b67a8b0/" rel="next" title="应用程序间的数据交换">
+      应用程序间的数据交换 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              暂无分类
-            </div>
-            <div class="category-all">
-              
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -281,6 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E4%B8%AD%E9%98%9F%E5%88%97%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">Java 中队列的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81"><span class="nav-number">2.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AbstractQueuedSynchronizer"><span class="nav-number">3.</span> <span class="nav-text">AbstractQueuedSynchronizer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node"><span class="nav-number">3.1.</span> <span class="nav-text">Node</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -436,6 +504,25 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '6b87b856b0a606a18d65',
+      clientSecret: '11c96f1d7a452a1615d1d3f4bf7d3ce30bea7cda',
+      repo        : 'commentsForBlog',
+      owner       : 'lingcheng-zeng',
+      admin       : ['lingcheng-zeng'],
+      id          : 'c6ec20583c77d36447538a03bdb6b432',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

@@ -20,20 +20,27 @@
     var CONFIG = {"hostname":"lingcheng-zeng.github.io","root":"/blog/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="欢迎交流">
+  <meta name="description" content="应用间的数据交换，本质上是内存中的数据转化为字节流从一端流向另一端，历经    内存 – 网络&#x2F;磁盘 – 内存 这一路径，涉及序列化，数据传输，反序列化等过程。 开发的应用程序通常构建在应用层之上，也就是说应用程序在进行数据传输时会受到如下各层协议的影响。  应用层协议的影响 传输层协议的影响 网络层协议的影响 链路层，物理层的影响  例如 浏览器通过http协议与服务端的通信。 后端服务间通过T">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Web请求处理链路跟踪">
-<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/posts/fe149bac/index.html">
+<meta property="og:title" content="应用程序间的数据交换">
+<meta property="og:url" content="https://lingcheng-zeng.github.io/blog/posts/9b67a8b0/index.html">
 <meta property="og:site_name" content="LingCheng">
-<meta property="og:description" content="欢迎交流">
+<meta property="og:description" content="应用间的数据交换，本质上是内存中的数据转化为字节流从一端流向另一端，历经    内存 – 网络&#x2F;磁盘 – 内存 这一路径，涉及序列化，数据传输，反序列化等过程。 开发的应用程序通常构建在应用层之上，也就是说应用程序在进行数据传输时会受到如下各层协议的影响。  应用层协议的影响 传输层协议的影响 网络层协议的影响 链路层，物理层的影响  例如 浏览器通过http协议与服务端的通信。 后端服务间通过T">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-16T04:47:05.000Z">
-<meta property="article:modified_time" content="2021-05-16T04:51:07.956Z">
+<meta property="og:image" content="https://github.com/LIngcheng-zeng/picture/blob/master/blog/HTTP%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/TCP%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/TCP%E8%BF%9E%E6%8E%A5%E6%96%AD%E5%BC%80.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8F%91%E9%80%81TCP%E6%8A%A5%E6%96%87.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.png">
+<meta property="article:published_time" content="2021-07-01T16:59:04.000Z">
+<meta property="article:modified_time" content="2021-07-05T13:18:33.762Z">
 <meta property="article:author" content="Zeng Lingcheng">
-<meta property="article:tag" content="SpringMVC">
+<meta property="article:tag" content="tcp">
+<meta property="article:tag" content="应用层协议">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/LIngcheng-zeng/picture/blob/master/blog/HTTP%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B.png">
 
-<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/posts/fe149bac/">
+<link rel="canonical" href="https://lingcheng-zeng.github.io/blog/posts/9b67a8b0/">
 
 
 <script id="page-configurations">
@@ -46,7 +53,7 @@
   };
 </script>
 
-  <title>Web请求处理链路跟踪 | LingCheng</title>
+  <title>应用程序间的数据交换 | LingCheng</title>
   
 
 
@@ -194,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/fe149bac/">
+    <link itemprop="mainEntityOfPage" href="https://lingcheng-zeng.github.io/blog/posts/9b67a8b0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -207,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Web请求处理链路跟踪
+          应用程序间的数据交换
         </h1>
 
         <div class="post-meta">
@@ -216,10 +223,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-16 12:47:05 / 修改时间：12:51:07" itemprop="dateCreated datePublished" datetime="2021-05-16T12:47:05+08:00">2021-05-16</time>
+              <time title="创建时间：2021-07-02 00:59:04" itemprop="dateCreated datePublished" datetime="2021-07-02T00:59:04+08:00">2021-07-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-05 21:18:33" itemprop="dateModified" datetime="2021-07-05T21:18:33+08:00">2021-07-05</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -239,7 +252,78 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>应用间的数据交换，本质上是内存中的数据转化为字节流从一端流向另一端，历经    内存 – 网络/磁盘 – 内存 这一路径，涉及序列化，数据传输，反序列化等过程。</p>
+<p>开发的应用程序通常构建在应用层之上，也就是说应用程序在进行数据传输时会受到如下各层协议的影响。</p>
+<ol>
+<li>应用层协议的影响</li>
+<li>传输层协议的影响</li>
+<li>网络层协议的影响</li>
+<li>链路层，物理层的影响</li>
+</ol>
+<p>例如</p>
+<p>浏览器通过http协议与服务端的通信。</p>
+<p>后端服务间通过TCP或者HTTP或者一些其他的协议进行通信。</p>
+<p>所以，要对已有的数据交换过程进行优化，也就是要对原有的交换链路进行评估和优化。netty 加快了数据的处理时间【单位时间内可以处理更多的请求】，使得网络可以更快的传输数据。不同的序列化协议，一个是要考虑执行序列化花费的时间，二是考虑序列化后数据的大小。</p>
+<p>链接：从缓存到应用进程  <a target="_blank" rel="noopener" href="https://github.com/rabbitmq/rabbitmq-server.git">https://github.com/rabbitmq/rabbitmq-server.git</a></p>
+<span id="more"></span>
+
+
+
+
+
+
+
+
+
+<h3 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h3><h4 id="HTTP事务"><a href="#HTTP事务" class="headerlink" title="HTTP事务"></a>HTTP事务</h4><p><img src="https://github.com/LIngcheng-zeng/picture/blob/master/blog/HTTP%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B.png" alt="HTTP事务"></p>
+<h4 id="HTTP认证"><a href="#HTTP认证" class="headerlink" title="HTTP认证"></a>HTTP认证</h4><p>只有特定的人才可以看到敏感信息，并执行特权事务。</p>
+<p>http的原生认证，包括基本认证和摘要认证。</p>
+<p>基本认证的主要流程如下：</p>
+<p>服务器返回401状态码进行质询，并用www-Authenticate 首部，指明所访问的受限资源。</p>
+<p>客户端用authorization,表明身份，去服务器获取授权。</p>
+<p>摘要认证：</p>
+<p>计算单向摘要,默认算法为Md5.</p>
+<p>接受任意长度的消息，产生一个128bit的摘要。然后用16进制数对其进行表示，也就是每4bit产生一个16进制的数。因此可视化的结果是32个16进制数的组合。</p>
+<p>16进制：0，1，2，3 … ,A,B,C,D,E</p>
+<p>Base64, 基本字母有64个。</p>
+<p>怎么把原字符转换为用基本字母表示的字符</p>
+<p>原字符 ，8bit。</p>
+<p>64个字母，只需要 6bit就能表示。 当原字符长度不够时，用0的二进制位补齐。</p>
+<p>Https</p>
+<p>对称密钥加密技术：指的是编码所使用的密钥值和解码所使用的密钥值相同。</p>
+<p>公开密钥加密技术：公开编码的密钥，接受端保留解码的密钥，两个密钥不相同。RSA算法是流行的一种。</p>
+<p>混合对称和非对称加密：通过公开密钥技术建立起安全的连接通道，然后传递一个随机对称密钥，利用对称密钥技术进行通信。</p>
+<p>加密算法是众所周知的。</p>
+<p>密钥，使加密算法按照期待的过程执行。</p>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><h4 id="TCP连接的建立，断开"><a href="#TCP连接的建立，断开" class="headerlink" title="TCP连接的建立，断开"></a>TCP连接的建立，断开</h4><p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/TCP%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B.png" alt="截屏2021-07-04 下午12.21.08"></p>
+<p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/TCP%E8%BF%9E%E6%8E%A5%E6%96%AD%E5%BC%80.png" alt="截屏2021-07-04 下午12.22.35"></p>
+<h4 id="TCP报文段首部格式"><a href="#TCP报文段首部格式" class="headerlink" title="TCP报文段首部格式"></a>TCP报文段首部格式</h4><p>源端口和目的端口各占两个字节。</p>
+<p>首部中的序号，本报文段的第一个字节的编号，占4个字节 ，也就是4GB的数据编号不会重复。在一个TCP连接中的所有字节流的按照写入顺序编号 。</p>
+<p>确认号，期望收到的对方下一个报文段的第一个字节的序列号。在确认报文中进行设置，也是占4个字节。</p>
+<p>数据偏移，指示出TCP首部的长度，占4bit。 数据偏移的单位是4个字节。因此首部长度 最大为 4 * 15 = 60</p>
+<p>保留，占6bit。</p>
+<p>URG,</p>
+<p>ACK , </p>
+<p>PSH,</p>
+<p>RST</p>
+<p>SYN</p>
+<p>FIN</p>
+<p>窗口，占两个字节。自确认号算起，告诉发送方还可以发送的数据量，单位是字节。【自己作为接受的一方，对对面的发送进行限制】</p>
+<p>检验和，校验首部和数据部分，占两个字节。</p>
+<p>紧急指针，指示URG =1 时，在本次报文段中紧急数据的长度。窗口之为0，也可以发送紧急数据</p>
+<h4 id="TCP可靠传输原理"><a href="#TCP可靠传输原理" class="headerlink" title="TCP可靠传输原理"></a>TCP可靠传输原理</h4><p>滑动窗口，超时重传，选择确认。</p>
+<h4 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h4><p>Ack =1 时，确认号字段有意义。持续计时器，解决0窗口后，窗口变化，报文丢失导致死锁的问题。</p>
+<p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8F%91%E9%80%81TCP%E6%8A%A5%E6%96%87.png" alt="截屏2021-07-02 上午10.59.53"></p>
+<h4 id="TCP的拥塞控制"><a href="#TCP的拥塞控制" class="headerlink" title="TCP的拥塞控制"></a>TCP的拥塞控制</h4><p>慢开始</p>
+<p>拥塞避免</p>
+<p>快重传</p>
+<p>快恢复</p>
+<p><img src="https://raw.githubusercontent.com/LIngcheng-zeng/picture/master/blog/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.png" alt="截屏2021-07-02 下午1.56.17"></p>
+<h3 id="因特网概述"><a href="#因特网概述" class="headerlink" title="因特网概述"></a><strong>因特网概述</strong></h3><p>所有的设备称为端系统，端系统通过<strong>通信链路</strong>和<strong>分组交换机</strong>连接到一起。</p>
+<p>这里的通信链路指的是实际的物理媒体。</p>
+<p>分组交换机从它的一条入通信链路接受到达的分组，并从它的一条出通信链路转发该分组。对于每条相连的链路，该分组交换机具有一个输出缓存，它用于存储准备发往该链路的分组。多数交换机在链路的输入端使用存储转发传输机制，也就是指在交换机开始向输出链路转发某个分组的第一个bit前，必须完整的收到这个分组。</p>
+<p>端系统，分组交换机和一些其他的因特网部件都要运行一系列协议，这些协议控制因特网中消息的接受和发送。</p>
+
     </div>
 
     
@@ -248,7 +332,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/SpringMVC/" rel="tag"># SpringMVC</a>
+              <a href="/blog/tags/tcp/" rel="tag"># tcp</a>
+              <a href="/blog/tags/%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE/" rel="tag"># 应用层协议</a>
           </div>
 
         
@@ -257,13 +342,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/posts/80587bc/" rel="prev" title="SpringBoot下业务Bean的生成过程跟踪">
-      <i class="fa fa-chevron-left"></i> SpringBoot下业务Bean的生成过程跟踪
+    <a href="/blog/posts/cb73b93d/" rel="prev" title="Java中队列介绍">
+      <i class="fa fa-chevron-left"></i> Java中队列介绍
     </a></div>
-      <div class="post-nav-item">
-    <a href="/blog/posts/550e64fc/" rel="next" title="">
-       <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -323,6 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E8%AE%A4%E8%AF%81"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP认证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%EF%BC%8C%E6%96%AD%E5%BC%80"><span class="nav-number">2.1.</span> <span class="nav-text">TCP连接的建立，断开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">TCP报文段首部格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E5%8E%9F%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">TCP可靠传输原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">2.4.</span> <span class="nav-text">TCP流量控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">2.5.</span> <span class="nav-text">TCP的拥塞控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A0%E7%89%B9%E7%BD%91%E6%A6%82%E8%BF%B0"><span class="nav-number">3.</span> <span class="nav-text">因特网概述</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -489,7 +572,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'commentsForBlog',
       owner       : 'lingcheng-zeng',
       admin       : ['lingcheng-zeng'],
-      id          : '7566a90ff12c736458c6d87cee77426a',
+      id          : '947d0dd983cca7336d14366668b3ec07',
         language: '',
       distractionFreeMode: true
     });
