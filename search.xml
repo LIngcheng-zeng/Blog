@@ -151,14 +151,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Web请求处理链路跟踪</title>
-    <url>/blog/posts/fe149bac/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>SpringMVC</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>应用程序间的数据交换</title>
     <url>/blog/posts/9b67a8b0/</url>
     <content><![CDATA[<h1 id="应用间的数据交换"><a href="#应用间的数据交换" class="headerlink" title="应用间的数据交换"></a>应用间的数据交换</h1><p>应用间的数据交换，本质上是内存中的数据转化为字节流从一端流向另一端，历经    内存 – 网络/磁盘 – 内存 这一路径，涉及序列化，数据传输，反序列化等过程。</p>
@@ -248,6 +240,14 @@
       <tags>
         <tag>tcp</tag>
         <tag>应用层协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web请求处理链路跟踪</title>
+    <url>/blog/posts/fe149bac/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>SpringMVC</tag>
       </tags>
   </entry>
   <entry>
